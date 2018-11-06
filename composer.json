@@ -1,0 +1,30 @@
+{
+    "name": "flowd/scheduler-forker",
+    "type": "typo3-cms-extension",
+    "description": "Run each TYPO3 scheduler task in a forked process",
+    "homepage": "https://flowd.de",
+    "license": ["GPL-2.0-or-later"],
+    "authors": [{
+        "name": "Sascha Egerer",
+        "email": "sascha.egerer@flowd.de",
+        "role": "Developer",
+        "homepage": "https://flowd.de"
+    }],
+    "require": {
+        "php": ">=7.1.0",
+        "typo3/cms-core": "^8.7 || ^9.5"
+    },
+    "replace": {
+        "scheduler_forker": "self.version"
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "scheduler_forker"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Flowd\\SchedulerForker\\": "Classes/"
+        }
+    }
+}
