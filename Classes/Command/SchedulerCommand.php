@@ -45,7 +45,12 @@ class SchedulerCommand extends Command
             try {
                 $task = $this->scheduler->fetchTask();
                 try {
-                    $command = sprintf($_SERVER['argv'][0] . ' scheduler:run --task %d 2>&1', $task->getTaskUid());
+                    $command = sprintf(
+                        '%s %s scheduler:run --task %d 2>&1',
+                        PHP_BINARY,
+                        $_SERVER['argv'][0],
+                        $task->getTaskUid()
+                    );
                     $commandResult = [];
                     $commandReturnCode = 0;
                     CommandUtility::exec($command, $commandResult, $commandReturnCode);
