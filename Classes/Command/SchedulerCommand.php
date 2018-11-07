@@ -35,7 +35,7 @@ class SchedulerCommand extends Command
         // Make sure the _cli_ user is loaded
         Bootstrap::getInstance()->initializeBackendAuthentication();
 
-        $this->scheduler = GeneralUtility::makeInstance(Scheduler::class);
+        $scheduler = GeneralUtility::makeInstance(Scheduler::class);
 
         $returnCode = 0;
 
@@ -43,7 +43,7 @@ class SchedulerCommand extends Command
             // Try getting the next task and execute it
             // If there are no more tasks to execute, an exception is thrown by \TYPO3\CMS\Scheduler\Scheduler::fetchTask()
             try {
-                $task = $this->scheduler->fetchTask();
+                $task = $scheduler->fetchTask();
                 try {
                     $command = sprintf(
                         '%s %s scheduler:run --task %d 2>&1',
@@ -69,13 +69,12 @@ class SchedulerCommand extends Command
                     continue;
                 }
             } catch (\OutOfBoundsException $e) {
-                $this->hasTask = false;
+                break;
             } catch (\UnexpectedValueException $e) {
                 continue;
             }
-        } while ($this->hasTask);
+        } while (true);
 
         return $returnCode;
     }
-
 }
