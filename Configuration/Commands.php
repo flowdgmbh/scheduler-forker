@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * Commands to be executed by typo3, where the key of the array
  * is the name of the command (to be called as the first argument after typo3).
@@ -7,6 +8,6 @@
  */
 return [
     'scheduler_forker:run' => [
-        'class' => \Flowd\SchedulerForker\Command\SchedulerCommand::class
-    ]
+        'class' => \Flowd\SchedulerForker\Command\SchedulerCommand::class,
+    ],
 ];

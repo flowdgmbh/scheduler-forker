@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace Flowd\SchedulerForker\Command;
 
 use Symfony\Component\Console\Command\Command;
@@ -18,7 +18,7 @@ class SchedulerCommand extends Command
     /**
      * Configure the command by defining the name, options and arguments
      */
-    public function configure()
+    public function configure(): void
     {
         $this->setDescription('Start the TYPO3 Scheduler from the command line and run each task in a separate process.');
     }
@@ -33,7 +33,7 @@ class SchedulerCommand extends Command
     public function execute(InputInterface $input, OutputInterface $output)
     {
         // Make sure the _cli_ user is loaded
-        Bootstrap::getInstance()->initializeBackendAuthentication();
+        Bootstrap::initializeBackendAuthentication();
 
         $scheduler = GeneralUtility::makeInstance(Scheduler::class);
 
@@ -59,7 +59,7 @@ class SchedulerCommand extends Command
                         $returnCode = 1;
                         $output->writeln(sprintf('Command failed with exit code %d: %s', $commandReturnCode, $command));
                     }
-                    if (!empty($commandResult)) {
+                    if ($commandResult !== null && count($commandResult) !== 0) {
                         $output->writeln($commandResult);
                     }
                 } catch (\Exception $e) {
