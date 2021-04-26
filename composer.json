@@ -22,9 +22,6 @@
         "phpstan/phpstan-strict-rules": "^0.10",
         "saschaegerer/phpstan-typo3": "0.10.x-dev"
     },
-    "replace": {
-        "scheduler_forker": "self.version"
-    },
     "extra": {
         "typo3/cms": {
             "extension-key": "scheduler_forker"
